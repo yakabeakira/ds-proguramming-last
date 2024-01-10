@@ -1,4 +1,6 @@
 import sqlite3
+from bs4 import BeautifulSoup
+import requeｓts
 path = '/Users/yakabe/hasegawa/last12/ds-proguramming-last/'
 
 #DBファイルを保存するためのファイルパス
@@ -13,3 +15,4 @@ cur = con.cursor()
 sql_create_table_wheatherindex = 'CREATE TABLE wheather_index(cityday TEXT, wheatherindex TEXT, good_sleep_score FLOAT);'
 cur.execute(sql_create_table_wheatherindex)
 con.close()
+
