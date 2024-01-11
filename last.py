@@ -20,3 +20,27 @@ sql_create_table_sleep = 'CREATE TABLE sleepindex(sleep_index TEXT);'
 cur.execute(sql_create_table_sleep)
 
 con.close()
+
+#データをDBに挿入する(スクレイピング)
+con = sqlite3.connect(path + db_name)
+
+cur = con.cursor()
+
+#スクレイピング先のurlを取得
+url = 'https://tenki.jp/indexes/sleep/3/15/4510/12227/'
+r = requests.get(url)
+
+#HTMLソースをBeautifulSoupオブジェクトに変換する
+html_soup = BeautifulSoup(r.text, "html.parser")
+
+#睡眠指数のタグを取得
+sleep_indexes= html_soup.find_all('p', class_='indexes-telop-0')
+
+for sleep_index in sleep_indexes:
+  cur.execute("INSERT INTO sleepindex (sleep_index) VALUES(?);", (sleep_index.text.strip(),))
+  #timeモジュールで負荷軽減
+  time.sleep(1)
+
+#コミット処理（データ操作を反映させる）
+con.commit()
+con.close()
