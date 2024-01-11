@@ -7,7 +7,7 @@ import time
 #DBファイルを保存するためのパスを作成
 path = '/Users/yakabe/hasegawa/last12/ds-proguramming-last/'
 #DBファイル名
-db_name = 'weather.sqlite'
+db_name = 'sleepindex.sqlite'
 con = sqlite3.connect(path + db_name)
 con.close()
 
