@@ -11,4 +11,12 @@ db_name = 'weather.sqlite'
 con = sqlite3.connect(path + db_name)
 con.close()
 
+#テーブル作成
+con = sqlite3.connect(path + db_name)
 
+cur = con.cursor()
+
+sql_create_table_weather = 'CREATE TABLE sleepindex(sleep_index text, high_temp text, low_temp);'
+cur.execute(sql_create_table_weather)
+
+con.close()
