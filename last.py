@@ -1,7 +1,7 @@
 #必要なモジュールを全てインポート
 import sqlite3
 from bs4 import BeautifulSoup
-import requeｓts
+import requests
 import time
 
 #DBファイルを保存するためのパスを作成
@@ -16,7 +16,9 @@ con = sqlite3.connect(path + db_name)
 
 cur = con.cursor()
 
-sql_create_table_weather = 'CREATE TABLE sleepindex(sleep_index text, high_temp text, low_temp text);'
+sql_create_table_weather = 'CREATE TABLE sleepindex(sleep_index text);'
 cur.execute(sql_create_table_weather)
 
 con.close()
+
+
