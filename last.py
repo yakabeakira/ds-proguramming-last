@@ -22,3 +22,27 @@ cur.execute(sql_create_table_weather)
 con.close()
 
 
+#データをDBに挿入する(スクレイピング)
+con = sqlite3.connect(path + db_name)
+
+cur = con.cursor()
+
+#スクレイピング先のurlを取得
+url = 'https://tenki.jp/indexes/sleep/3/15/4510/12227/'
+r = requests.get(url)
+
+#HTMLソースをBeautifulSoupオブジェクトに変換する
+html_soup = BeautifulSoup(r.text, "html.parser")
+
+#睡眠指数のタグを取得
+sleep_indexes= html_soup.find_all('p', class_='indexes-telop-0')
+
+#timeモジュールで負荷軽減
+for i in sleep_indexes:
+    time.sleep(1)
+
+cur.executemany("INSERT INTO sleepindex (sleep_indexes) VALUES(?);")
+
+#コミット処理（データ操作を反映させる）
+con.commit()
+con.close()
