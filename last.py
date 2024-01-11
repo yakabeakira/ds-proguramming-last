@@ -37,11 +37,10 @@ html_soup = BeautifulSoup(r.text, "html.parser")
 #睡眠指数のタグを取得
 sleep_indexes= html_soup.find_all('p', class_='indexes-telop-0')
 
-#timeモジュールで負荷軽減
-for i in sleep_indexes:
-    time.sleep(1)
-
 cur.executemany("INSERT INTO sleepindex (sleep_indexes) VALUES(?);")
+
+#timeモジュールで負荷軽減
+time.sleep(1)
 
 #コミット処理（データ操作を反映させる）
 con.commit()
