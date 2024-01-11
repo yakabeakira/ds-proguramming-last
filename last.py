@@ -44,3 +44,17 @@ for sleep_index in sleep_indexes:
 #コミット処理（データ操作を反映させる）
 con.commit()
 con.close()
+
+
+#テーブルのデータ参照用
+con = sqlite3.connect(path + db_name)
+
+cur = con.cursor()
+
+sql_select = 'SELECT * FROM sleepindex;'
+
+cur.execute(sql_select)
+for r in cur:
+  print(r)
+
+con.close()
